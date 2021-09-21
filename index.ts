@@ -1,4 +1,5 @@
 import Express from "express";
+import echo from "./routes/echo";
 var cors = require("cors");
 require("dotenv").config();
 
@@ -10,6 +11,6 @@ let app = Express();
 //Enabling cors allow page to be access on a diffrent domain which is normally blocked by most browser for security reasons 
 app.use(nocache());
 app.use(cors());
-
+app.use(echo)
 
 app.listen(process.env.PORT);
