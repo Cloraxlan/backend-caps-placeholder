@@ -1,5 +1,6 @@
 import User, { SessionToken } from "../../interfaces/User";
 import { v4 as uuidv4, v4 } from "uuid";
+import { connection } from "../mongoConnection";
 
 //2 weeks default duration
 export const generateToken: (duration?: number) => SessionToken = (
@@ -12,19 +13,30 @@ export const generateToken: (duration?: number) => SessionToken = (
 		value: v4(),
 	};
 };
+
+const DATABASE = "caps-placeholder";
+const COLLECTION = "Users";
+
 //TODO, use only token....
 export default class Session {
-	private _user: User;
 	private _expired: boolean;
 	private _token: SessionToken;
-	constructor(user: User, token: SessionToken) {
-		this._user = user;
+	//Constant, do updateUser() to get latest info from database
+	private _user: User;
+	constructor(token: SessionToken) {
 		this._token = token;
 		if (token.expires > new Date().getTime()) {
 			this._expired = false;
 		} else {
 			this._expired = true;
 		}
+	}
+	//Get data from database not given
+	public async updateUser() {
+		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
+
+		let user = userConnection.find({ tokens: this._token });
+		console.log;
 	}
 	get user(): User {
 		return this._user;
