@@ -1,6 +1,6 @@
 import User from "../../interfaces/User";
 import { connection } from "../mongoConnection";
-import { generateToken } from "./generateSession";
+import { generateToken } from "./Session";
 
 const DATABASE = "caps-placeholder";
 const COLLECTION = "Users";
