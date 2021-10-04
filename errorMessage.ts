@@ -9,5 +9,6 @@ export const errorMessage = (
 ) => {
 	metadata.success = false;
 	metadata.responce = message;
+	res.statusCode = code;
 	res.json(metadata);
 };
