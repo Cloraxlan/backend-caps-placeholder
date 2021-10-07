@@ -3,6 +3,7 @@ import { errorMessage } from "../../errorMessage";
 import Post from "../../interfaces/Post";
 import User from "../../interfaces/User";
 import { createAccount } from "../../processes/account/createAccount";
+import Session from "../../processes/account/Session";
 
 // /account/login
 export default Router().post("/", async (req, res) => {
@@ -13,11 +14,8 @@ export default Router().post("/", async (req, res) => {
 
 	try {
 		if (req.body.token) {
-			user = {
-				email: req.body.email,
-				name: req.body.name,
-				tokens: [],
-			};
+			let x = new Session(req.body.token);
+			x.updateUser();
 		} else {
 			throw "No session token given";
 		}

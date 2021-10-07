@@ -22,7 +22,7 @@ export default class Session {
 	private _expired: boolean;
 	private _token: SessionToken;
 	//Constant, do updateUser() to get latest info from database
-	private _user: User;
+	//private _user: User;
 	constructor(token: SessionToken) {
 		this._token = token;
 		if (token.expires > new Date().getTime()) {
@@ -36,11 +36,11 @@ export default class Session {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
 		let user = userConnection.find({ tokens: this._token });
-		console.log;
+		console.log(user);
 	}
-	get user(): User {
+	/*get user(): User {
 		return this._user;
-	}
+	}*/
 	get expired(): boolean {
 		return this._expired;
 	}
