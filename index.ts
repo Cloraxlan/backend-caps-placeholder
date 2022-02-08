@@ -1,5 +1,6 @@
 import Express from "express";
 import createAccount from "./routes/accounts/createAccount";
+import debug from "./routes/debug";
 import echo from "./routes/echo";
 var cors = require("cors");
 require("dotenv").config();
@@ -13,6 +14,6 @@ let app = Express();
 app.use(nocache());
 app.use(cors());
 app.use(require("body-parser").urlencoded({ extended: false }));
-app.use(echo);
+app.use(debug);
 app.use("/account/createAccount", createAccount);
 app.listen(process.env.PORT);
