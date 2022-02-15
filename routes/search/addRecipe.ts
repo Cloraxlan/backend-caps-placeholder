@@ -14,4 +14,5 @@ export default Router().post("/", async (req, res) => {
 	} catch (error) {
 		errorMessage(metadata, res, error);
 	}
+	res.json(metadata);
 });
