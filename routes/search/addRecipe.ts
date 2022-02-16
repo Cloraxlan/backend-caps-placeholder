@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { serialRecipe } from "../../../caps-placeholder/src/Interfaces-Classes/Recipe";
 import { errorMessage } from "../../errorMessage";
 import Post from "../../interfaces/Post";
 import { add } from "../../processes/search/add";
@@ -11,7 +12,7 @@ export default Router().post("/", async (req, res) => {
 	};
 	console.log(req.body);
 	try {
-		add(req.body.recipe);
+		add(JSON.parse(req.body.recipe) as serialRecipe);
 	} catch (error) {
 		errorMessage(metadata, res, error);
 	}
