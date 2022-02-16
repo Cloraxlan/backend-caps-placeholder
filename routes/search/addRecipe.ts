@@ -9,6 +9,7 @@ export default Router().post("/", async (req, res) => {
 		path: "/search/add",
 		success: true,
 	};
+	console.log(req.body);
 	try {
 		add(req.body.recipe);
 	} catch (error) {
