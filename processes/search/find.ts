@@ -12,4 +12,5 @@ export const findAll = async () => {
 	userConnection.find().forEach((doc) => {
 		recipes.push(doc as serialRecipe);
 	});
+	return recipes;
 };
