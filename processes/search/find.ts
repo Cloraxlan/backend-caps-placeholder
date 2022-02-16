@@ -8,8 +8,8 @@ const DATABASE = "caps-placeholder";
 const COLLECTION = "Recipes";
 export const findAll = async () => {
 	let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
-	console.log(userConnection.find());
-	return userConnection.find().map((doc) => {
-		return doc;
+	let recipes: serialRecipe[] = [];
+	userConnection.find().forEach((doc) => {
+		recipes.push(doc as serialRecipe);
 	});
 };
