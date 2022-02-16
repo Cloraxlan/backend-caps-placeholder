@@ -9,7 +9,7 @@ const COLLECTION = "Recipes";
 export const findAll = async () => {
 	let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 	let recipes: serialRecipe[] = [];
-	userConnection.find().forEach((doc) => {
+	await userConnection.find().forEach((doc) => {
 		console.log(doc);
 		recipes.push(doc as serialRecipe);
 	});
