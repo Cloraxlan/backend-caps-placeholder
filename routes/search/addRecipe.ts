@@ -12,6 +12,7 @@ export default Router().post("/", async (req, res) => {
 	};
 	console.log(req.body);
 	try {
+		console.log(req.body.recipe);
 		add(JSON.parse(req.body.recipe) as serialRecipe);
 		res.json(metadata);
 	} catch (error) {
