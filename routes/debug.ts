@@ -15,7 +15,6 @@ let y = new Recipe(
 	["run", "and hide"],
 	{ baseServings: 2 },
 );
-console.log(y.ingredients);
 y.ingredients.map((i) => {
 	i.fullName();
 });
