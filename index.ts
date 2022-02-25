@@ -1,4 +1,5 @@
 import Express from "express";
+import saveRecipe from "./routes/accounts/saveRecipe";
 import createAccount from "./routes/accounts/createAccount";
 import debug from "./routes/debug";
 import echo from "./routes/echo";
@@ -20,4 +21,6 @@ app.use(debug);
 app.use("/account/createAccount", createAccount);
 app.use("/search/findAll", getAllRecipes);
 app.use("/search/add", addRecipe);
+app.use("/account/saveRecipe", saveRecipe);
+
 app.listen(process.env.PORT);

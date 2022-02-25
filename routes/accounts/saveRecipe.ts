@@ -3,26 +3,28 @@ import { errorMessage } from "../../errorMessage";
 import Post from "../../interfaces/Post";
 import User from "../../interfaces/User";
 import { createAccount } from "../../processes/account/createAccount";
+import { saveRecipe } from "../../processes/account/saveRecipe";
+import Session from "../../processes/account/Session";
 
-// /account/createAccount
+// /account/login
 export default Router().post("/", async (req, res) => {
 	let metadata: Post = {
-		path: "/account/createAccount",
+		path: "/account/saveRecipe",
 		success: true,
 	};
-	let user: User | null = null;
+
 	try {
-		if (req.body.email && req.body.name) {
-			user = {
-				email: req.body.email,
-				name: req.body.name,
-				tokens: [],
-				savedRecipeDates: [],
-			};
+		if (req.body.token) {
+			let x = new Session(req.body.token);
+			let user = await x.updateUser();
+			if (req.body.recipe) {
+				saveRecipe(user.email, req.body.recipe);
+			} else {
+				throw "No recipeDate given";
+			}
 		} else {
-			throw "Invalid Parameters for Create User";
+			throw "No session token given";
 		}
-		createAccount(user);
 	} catch (error) {
 		errorMessage(metadata, res, error);
 	}

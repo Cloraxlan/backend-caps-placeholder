@@ -32,11 +32,14 @@ export default class Session {
 		}
 	}
 	//Get data from database not given
-	public async updateUser() {
+	public async updateUser(): Promise<User> {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
-		let user = userConnection.find({ tokens: this._token });
+		let user = (await userConnection.find({
+			tokens: this._token,
+		})) as unknown as User;
 		console.log(user);
+		return user;
 	}
 	/*get user(): User {
 		return this._user;
