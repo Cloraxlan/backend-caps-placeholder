@@ -17,6 +17,7 @@ export default Router().post("/", async (req, res) => {
 		if (req.body.token) {
 			let x = new Session(req.body.token);
 			let user = await x.updateUser();
+			console.log(user.name);
 			if (req.body.recipe) {
 				saveRecipe(user.email, req.body.recipe);
 			} else {
