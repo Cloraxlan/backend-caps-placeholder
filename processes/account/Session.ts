@@ -35,9 +35,11 @@ export default class Session {
 	public async updateUser(): Promise<User> {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
-		let user = (await userConnection.find({
-			"tokens.value": this._token,
-		})) as unknown as User;
+		let user = (
+			await userConnection.find({
+				"tokens.value": this._token,
+			})
+		).next() as unknown as User;
 		console.log(user);
 		return user;
 	}
