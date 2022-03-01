@@ -36,7 +36,7 @@ export default class Session {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
 		let user = (await userConnection.find({
-			tokens: this._token,
+			"tokens.value": this._token,
 		})) as unknown as User;
 		console.log(user);
 		return user;
