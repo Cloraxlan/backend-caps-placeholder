@@ -5,6 +5,7 @@ import debug from "./routes/debug";
 import echo from "./routes/echo";
 import addRecipe from "./routes/search/addRecipe";
 import getAllRecipes from "./routes/search/getAllRecipes";
+import getSavedRecipes from "./routes/accounts/getSavedRecipes";
 var cors = require("cors");
 require("dotenv").config();
 
@@ -22,5 +23,6 @@ app.use("/account/createAccount", createAccount);
 app.use("/search/findAll", getAllRecipes);
 app.use("/search/add", addRecipe);
 app.use("/account/saveRecipe", saveRecipe);
+app.use("/account/getSavedRecipes", getSavedRecipes);
 
 app.listen(process.env.PORT);
