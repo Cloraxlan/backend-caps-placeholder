@@ -11,6 +11,7 @@ export default interface User {
 export interface RecipeDate {
 	recipe: serialRecipe;
 	date: string;
+	note?: string;
 }
 export interface SessionToken {
 	// v4 UUID
