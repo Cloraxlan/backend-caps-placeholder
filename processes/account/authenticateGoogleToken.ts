@@ -1,10 +1,12 @@
+import axios from "axios";
+
 export const authenticateGoogleToken = async (token: string) => {
-	let res = await fetch(
+	let res = await axios(
 		`https://www.googleapis.com/oauth2/v3/userinfo?access_token="` +
 			token +
 			`"`,
 	);
-	let json = await res.json();
+	let json = res.data;
 	console.log(json.email);
 	return json.email;
 };

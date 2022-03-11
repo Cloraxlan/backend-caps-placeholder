@@ -17,6 +17,7 @@
 	},
 	"homepage": "https://github.com/Cloraxlan/backend-caps-placeholder#readme",
 	"dependencies": {
+		"axios": "^0.26.1",
 		"body-parser": "^1.19.0",
 		"caps-placeholder-deps": "https://gitpkg.now.sh/Cloraxlan/caps-placeholder/src/Interfaces-Classes?master",
 		"compromise": "^13.11.4",
