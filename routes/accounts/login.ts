@@ -16,7 +16,9 @@ export default Router().post("/", async (req, res) => {
 	try {
 		//Google auth token
 		if (req.body.token) {
-			authenticateGoogleToken(req.body.token);
+			let email = await authenticateGoogleToken(req.body.token);
+			let session: Session = new Session(email);
+			metadata.responce = await session.genToken();
 		} else {
 			throw "No session token given";
 		}

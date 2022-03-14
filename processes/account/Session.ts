@@ -19,34 +19,45 @@ const COLLECTION = "Users";
 
 //TODO, use only token....
 export default class Session {
-	private _expired: boolean;
-	private _token: SessionToken;
+	private _email: string;
 	//Constant, do updateUser() to get latest info from database
 	//private _user: User;
-	constructor(token: SessionToken) {
-		this._token = token;
-		if (token.expires > new Date().getTime()) {
-			this._expired = false;
-		} else {
-			this._expired = true;
-		}
+	constructor(email: string) {
+		this._email = email;
 	}
+
 	//Get data from database not given
 	public async updateUser(): Promise<User> {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
 		let user = (
 			await userConnection.find({
-				"tokens.value": this._token,
+				email: this._email,
 			})
 		).next() as unknown as User;
 		console.log(user);
 		return user;
 	}
-	/*get user(): User {
-		return this._user;
-	}*/
-	get expired(): boolean {
-		return this._expired;
+	public static async getEmailFromToken(token: string) {
+		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
+
+		let user = await userConnection.findOne({
+			tokens: { $in: token },
+		});
+		return (user as User).email;
+	}
+	public async genToken() {
+		let token = generateToken();
+		let user = this.updateUser();
+		(await user).tokens.push(token);
+		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
+
+		await userConnection.findOneAndReplace(
+			{
+				email: this._email,
+			},
+			user,
+		);
+		return token;
 	}
 }
