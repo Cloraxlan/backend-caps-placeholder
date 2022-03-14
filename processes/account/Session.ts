@@ -38,6 +38,12 @@ export default class Session {
 		console.log(user);
 		return user;
 	}
+	public async isCreated() {
+		if (await this.updateUser()) {
+			return true;
+		}
+		return false;
+	}
 	public static async getEmailFromToken(token: string) {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
