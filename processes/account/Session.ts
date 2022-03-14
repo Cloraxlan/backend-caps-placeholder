@@ -48,7 +48,7 @@ export default class Session {
 	}
 	public async genToken() {
 		let token = generateToken();
-		let user = this.updateUser();
+		let user = await athis.updateUser();
 		(await user).tokens.push(token);
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
