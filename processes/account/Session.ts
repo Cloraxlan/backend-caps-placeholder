@@ -30,11 +30,11 @@ export default class Session {
 	public async updateUser(): Promise<User> {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
-		let user = (
+		let user = (await (
 			await userConnection.find({
 				email: this._email,
 			})
-		).next() as unknown as User;
+		).next()) as unknown as User;
 		console.log(user);
 		return user;
 	}
