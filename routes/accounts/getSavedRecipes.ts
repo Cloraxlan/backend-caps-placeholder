@@ -22,9 +22,9 @@ export default Router().post("/", async (req, res) => {
 		} else {
 			throw "No session token given";
 		}
+		res.json(metadata);
 	} catch (error) {
 		console.log(error);
 		errorMessage(metadata, res, error);
 	}
-	res.json(metadata);
 });
