@@ -31,7 +31,8 @@ export default Router().post("/", async (req, res) => {
 					tokens: [],
 					savedRecipeDates: [],
 				};
-				createAccount(user);
+				await createAccount(user);
+				metadata.responce = await session.genToken();
 			}
 		} else {
 			throw "No session token given";
