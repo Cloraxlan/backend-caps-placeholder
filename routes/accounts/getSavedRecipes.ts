@@ -16,6 +16,7 @@ export default Router().post("/", async (req, res) => {
 
 	try {
 		if (req.body.token) {
+			console.log(await Session.getEmailFromToken(req.body.token));
 			let x = new Session(await Session.getEmailFromToken(req.body.token));
 			let user = await x.updateUser();
 			console.log(user.name);
