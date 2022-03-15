@@ -45,6 +45,7 @@ export default class Session {
 		return false;
 	}
 	public static async getEmailFromToken(token: string) {
+		console.log(token);
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
 		let user = await userConnection.findOne({
