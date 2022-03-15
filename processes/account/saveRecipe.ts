@@ -9,7 +9,6 @@ export const saveRecipe = async (email: string, recipe: RecipeDate) => {
 	let doc: User | null = (await userConnection.findOne({
 		email: email,
 	})) as User;
-	console.log(doc);
 	if (doc) {
 		doc.savedRecipeDates.push(recipe);
 		userConnection.replaceOne({ email: email }, doc);

@@ -10,7 +10,6 @@ export default Router().post("/", async (req, res) => {
 		path: "/search/add",
 		success: true,
 	};
-	console.log(req.body);
 	try {
 		await add(JSON.parse(req.body.recipe) as serialRecipe);
 		res.json(metadata);

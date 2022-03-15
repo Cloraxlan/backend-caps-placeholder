@@ -9,7 +9,6 @@ export const getSaved = async (email: string): Promise<RecipeDate[]> => {
 	let doc: User | null = (await userConnection.findOne({
 		email: email,
 	})) as User;
-	console.log(doc);
 	if (doc) {
 		return doc.savedRecipeDates;
 	} else {
