@@ -16,11 +16,9 @@ export default Router().post("/", async (req, res) => {
 
 	try {
 		if (req.body.token) {
-			console.log(await Session.getEmailFromToken(req.body.token));
-			let x = new Session(await Session.getEmailFromToken(req.body.token));
-			let user = await x.updateUser();
-			console.log(user.name);
-			metadata.responce = await getSaved(user.email);
+			metadata.responce = await getSaved(
+				await Session.getEmailFromToken(req.body.token),
+			);
 		} else {
 			throw "No session token given";
 		}
