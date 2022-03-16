@@ -49,7 +49,7 @@ export default class Session {
 		let userConnection = (await connection).db(DATABASE).collection(COLLECTION);
 
 		let user = await userConnection.findOne({
-			tokens: { $in: [{ value: token }] },
+			tokens: { $elemMatch: { value: token } },
 		});
 		return (user as User).email;
 	}
